@@ -1,0 +1,45 @@
+<h1>Green Leaves</h1>
+<div class="row">
+  <form [formGroup]="form" class="row col-9" (ngSubmit)="submit()">
+    <div class="col-lg-6 col-xl-12 form-group">
+      <label class="col-3" for="nombre">Nombre:</label>
+      <input class="col-9" type="text" name="nombre" formControlName="nombre" />
+      <span
+        class="error"
+        *ngIf="
+          form.get('nombre').invalid &&
+          (form.get('nombre').dirty || form.get('nombre').touched)
+        "
+        >Error en campo</span
+      >
+    </div>
+
+    <div class="col-lg-6 col-xl-12 form-group">
+      <label class="col-3" for="email">E-mail:</label>
+      <input class="col-9" type="text" name="email" formControlName="email" />
+    </div>
+    <div class="col-lg-6 col-xl-12 form-group">
+      <label class="col-3" for="telefono">Teléfono:</label>
+      <input
+        class="col-9"
+        type="text"
+        name="telefono"
+        formControlName="telefono"
+      />
+    </div>
+    <div class="col-lg-6 col-xl-12 form-group">
+      <label class="col-3" for="fecha">Fecha:</label>
+      <input class="col-9" type="date" name="fecha" formControlName="fecha" />
+    </div>
+    <div class="col-lg-6 col-xl-12 form-group">
+      <label class="col-3" for="ciudad">Ciudad y estado:</label>
+      <input class="col-9" type="text" name="ciudad" formControlName="ciudad" />
+    </div>
+    <div class="col-lg-6 col-xl-12 form-group submit-link">
+      <input type="submit" value="Enviar" />
+    </div>
+  </form>
+  <div class="col-3">
+    <p>[this space for messageBox, or just do a modal, whatever]</p>
+  </div>
+</div>
