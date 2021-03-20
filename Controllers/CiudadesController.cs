@@ -28,12 +28,10 @@ namespace Ectotec.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IEnumerable<Ciudad>> Get(string termino)
+        public async Task<IEnumerable<Ciudad>> Get(string termino = "")
         {
             // TODO: extract 10 max search results to config var
-            _logger.LogInformation("Ciudades.Get");
-            Console.WriteLine(termino);
-            return await _repo.GetSugerenciasCiudades(termino, 10);
+            return await _repo.GetSugerenciasCiudades(termino, 10);;
         }
     }
 }
