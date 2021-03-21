@@ -30,7 +30,7 @@ namespace Ectotec.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IEnumerable<Ciudad>> Get(string termino = "")
         {
-            // TODO: extract 10 max search results to config var
+            // TODO: extract 10 max search results to config var (appsettings)
             return await _repo.GetSugerenciasCiudades(termino, 10);;
         }
     }

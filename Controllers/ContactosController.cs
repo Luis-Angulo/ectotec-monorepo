@@ -58,10 +58,11 @@ namespace Ectotec.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Post([FromBody] Contacto contacto)
         {
-            _logger.LogInformation("Contactos.Post");
-            Console.WriteLine(contacto);
+            // TODO: clean up after test of what happens when you build obj graph by hand
+            contacto.CiudadId = contacto.Ciudad.CiudadId;
+            contacto.Ciudad = await _repo.GetCiudad(contacto.Ciudad.CiudadId);
             await _repo.AddContacto(contacto);
-            var uriRecurso = $"http://localhost:5000/api/v1/contactos/{contacto.Id}";
+            var uriRecurso = $"http://localhost:5000/api/v1/contactos/{contacto.ContactoId}";
             return Created(uriRecurso, contacto);
         }
 

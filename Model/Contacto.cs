@@ -6,7 +6,7 @@ namespace Ectotec.Modelo
 {
     public class Contacto
     {
-        public int Id { get; set; }
+        public int ContactoId { get; set; }
         [Required]
         public string Nombre { get; set; }
         [Required]
@@ -15,7 +15,8 @@ namespace Ectotec.Modelo
         public string Telefono { get; set; }
         [Required]
         public DateTime Fecha { get; set; }
-        [Required]
+        public int CiudadId { get; set; }
+        [Required]        
         public Ciudad Ciudad { get; set; }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ectotec.Persistencia.Migraciones
+namespace ectotec.Persistencia.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,37 +11,37 @@ namespace ectotec.Persistencia.Migraciones
                 name: "Ciudades",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    CiudadId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     NombreCiudad = table.Column<string>(type: "TEXT", nullable: false),
                     NombreEstado = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ciudades", x => x.Id);
+                    table.PrimaryKey("PK_Ciudades", x => x.CiudadId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Contactos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    ContactoId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Nombre = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     Telefono = table.Column<string>(type: "TEXT", nullable: false),
                     Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CiudadId = table.Column<int>(type: "INTEGER", nullable: true)
+                    CiudadId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contactos", x => x.Id);
+                    table.PrimaryKey("PK_Contactos", x => x.ContactoId);
                     table.ForeignKey(
                         name: "FK_Contactos_Ciudades_CiudadId",
                         column: x => x.CiudadId,
                         principalTable: "Ciudades",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "CiudadId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

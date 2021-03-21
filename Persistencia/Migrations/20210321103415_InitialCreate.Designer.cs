@@ -3,14 +3,16 @@ using System;
 using Ectotec.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ectotec.Persistencia.Migraciones
+namespace ectotec.Persistencia.Migrations
 {
     [DbContext(typeof(EctotecContext))]
-    partial class EctotecContextModelSnapshot : ModelSnapshot
+    [Migration("20210321103415_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,7 +20,7 @@ namespace ectotec.Persistencia.Migraciones
 
             modelBuilder.Entity("Ectotec.Modelo.Ciudad", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CiudadId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -30,18 +32,18 @@ namespace ectotec.Persistencia.Migraciones
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("CiudadId");
 
                     b.ToTable("Ciudades");
                 });
 
             modelBuilder.Entity("Ectotec.Modelo.Contacto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ContactoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CiudadId")
+                    b.Property<int>("CiudadId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
@@ -59,7 +61,7 @@ namespace ectotec.Persistencia.Migraciones
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("ContactoId");
 
                     b.HasIndex("CiudadId");
 
@@ -69,10 +71,17 @@ namespace ectotec.Persistencia.Migraciones
             modelBuilder.Entity("Ectotec.Modelo.Contacto", b =>
                 {
                     b.HasOne("Ectotec.Modelo.Ciudad", "Ciudad")
-                        .WithMany()
-                        .HasForeignKey("CiudadId");
+                        .WithMany("Contactos")
+                        .HasForeignKey("CiudadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Ciudad");
+                });
+
+            modelBuilder.Entity("Ectotec.Modelo.Ciudad", b =>
+                {
+                    b.Navigation("Contactos");
                 });
 #pragma warning restore 612, 618
         }

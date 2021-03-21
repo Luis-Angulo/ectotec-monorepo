@@ -9,5 +9,7 @@ namespace Ectotec.Persistencia
         public Task<IEnumerable<Ciudad>> GetSugerenciasCiudades(string terminoBusqueda, int maxResultados);
 
         public Task AddContacto(Contacto contacto);
+
+        public Task<Ciudad> GetCiudad(int ciudadId);
     }
 }

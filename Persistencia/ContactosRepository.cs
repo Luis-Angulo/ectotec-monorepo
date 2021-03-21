@@ -21,7 +21,14 @@ namespace Ectotec.Persistencia
             .Take(maxResultados)
             .ToListAsync();
 
-        public async Task AddContacto(Contacto contacto) =>
+        public async Task AddContacto(Contacto contacto) {
             await _ctx.Contactos.AddAsync(contacto);
+            await _ctx.SaveChangesAsync();
+            return;
+        }
+
+        public async Task<Ciudad> GetCiudad(int ciudadId) {
+            return await _ctx.Ciudades.FindAsync(ciudadId);
+        } 
     }
 }
