@@ -72,7 +72,7 @@ export class ContactFormComponent implements OnInit {
     let formdata = this.form.value;
     formdata.cityId = this.selectedCity.cityId;
     formdata.city = null;
-    if (this.form.valid) {
+    if (this.form.valid && formdata.cityId) {
       console.log(formdata);
       this.contactService
         .postContact(formdata)
