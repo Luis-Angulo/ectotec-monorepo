@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { debounceTime, skipWhile, switchMap } from "rxjs/operators";
 import { Page } from "src/app/shared/page.type";
 import { PageRequest } from "src/app/shared/pageRequest.type";
@@ -23,7 +24,8 @@ export class ContactFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private contactService: ContactService,
-    private cityService: CityService
+    private cityService: CityService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -73,12 +75,13 @@ export class ContactFormComponent implements OnInit {
     formdata.cityId = this.selectedCity.cityId;
     formdata.city = null;
     if (this.form.valid && formdata.cityId) {
-      console.log(formdata);
       this.contactService
         .postContact(formdata)
-        .subscribe((e) => console.log(e));
+        .subscribe(() =>{
+          this.router.navigate(['/success']);
+        });
     } else {
-      alert("form is invalid");
+      alert("Errores en el formulario!");
     }
   }
 }

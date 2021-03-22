@@ -6,10 +6,11 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SuccessComponent } from './success/success.component';
 
 
 @NgModule({
-  declarations: [ContactFormComponent],
+  declarations: [ContactFormComponent, SuccessComponent],
   imports: [
     CommonModule,
     ContactRoutingModule,
