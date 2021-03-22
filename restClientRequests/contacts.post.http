@@ -1,0 +1,10 @@
+POST https://localhost:5001/api/v1/contacts HTTP/1.1
+content-type: application/json
+
+{
+    "name": "test name",
+        "email": "mail@email.com",
+        "phone": "12345678",
+        "cityId": 2,
+        "date":"2021-03-22T09:39:04.939Z"
+}
