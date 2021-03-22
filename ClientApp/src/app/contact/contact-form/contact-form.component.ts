@@ -30,16 +30,16 @@ export class ContactFormComponent implements OnInit {
     const pr: PageRequest = { searchTerm: "" };
     this.form = this.buildForm(pr);
     this.fetchCities(pr.searchTerm).subscribe((page) => {
-      
       this.page = page;
     });
   }
 
   buildForm(pr: PageRequest): FormGroup {
+    const phonePattern = /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i
     const form = this.fb.group({
-      name: ["", Validators.required],
-      email: ["", Validators.required],
-      phone: ["", Validators.required],
+      name: ["", [Validators.required, Validators.minLength(3)]],
+      email: ["", [Validators.required, Validators.email]],
+      phone: ["", [Validators.required, Validators.pattern(phonePattern)]],
       date: ["", Validators.required],
       city: ["", Validators.required],
     });
@@ -72,9 +72,11 @@ export class ContactFormComponent implements OnInit {
     let formdata = this.form.value;
     formdata.cityId = this.selectedCity.cityId;
     formdata.city = null;
-    if (this.form.valid) {      
+    if (this.form.valid) {
       console.log(formdata);
-      this.contactService.postContact(formdata).subscribe(e => console.log(e));
+      this.contactService
+        .postContact(formdata)
+        .subscribe((e) => console.log(e));
     } else {
       alert("form is invalid");
     }
