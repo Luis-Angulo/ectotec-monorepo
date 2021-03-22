@@ -1,9 +1,16 @@
 <div class="success-container">
-    <article>
-        <h3>Gracias por proporcionar sus datos</h3>
-        <p>Nuestro departamento de catálogos se pondrá en contacto con usted a la brevedad posible.</p>
-        <a [routerLink]="['/']" class="button">Regresar a inicio</a>
-    </article>
+  <article>
+    <h3>Estimado {{ contactName }}</h3>
+    <p>
+      Hemos recibido sus datos y nos pondremos en contacto con usted a la
+      brevedad posible. Enviaremos un correo con información a su cuenta:
+      {{ emailAccount }}
+    </p>
+    <a [routerLink]="['/']" class="button">Regresar a inicio</a>
+  </article>
+  <footer>
+    <h5>Atte.</h5>
+    <h5>Green Leaves</h5>
+    <p>{{ city }} a {{ date }}</p>
+  </footer>
 </div>
-
-
