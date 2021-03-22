@@ -15,7 +15,10 @@ namespace Ectotec.Persistence
         }
         public async Task<IEnumerable<City>> GetCities(string searchTerm, int maxResults) =>
             await _context.Cities
-            .Where(c => c.CityName.Contains(searchTerm))
+            .Where(c => 
+            c.CityName.ToLower().Contains(searchTerm) ||
+            c.StateName.ToLower().Contains(searchTerm))
+            .OrderBy(c => c.CityName)
             .Take(maxResults)
             .ToListAsync();
         public async Task<City> GetCity(int cityId) =>
