@@ -2,13 +2,13 @@
 <div class="row">
   <form [formGroup]="form" class="row col-9" (ngSubmit)="submit()">
     <div class="col-lg-6 col-xl-12 form-group">
-      <label class="col-3" for="nombre">Nombre:</label>
-      <input class="col-9" type="text" name="nombre" formControlName="nombre" />
+      <label class="col-3" for="name">Nombre:</label>
+      <input class="col-9" type="text" name="name" formControlName="name" />
       <span
         class="error"
         *ngIf="
-          form.get('nombre').invalid &&
-          (form.get('nombre').dirty || form.get('nombre').touched)
+          form.get('name').invalid &&
+          (form.get('name').dirty || form.get('name').touched)
         "
         >Error en campo</span
       >
@@ -19,21 +19,35 @@
       <input class="col-9" type="text" name="email" formControlName="email" />
     </div>
     <div class="col-lg-6 col-xl-12 form-group">
-      <label class="col-3" for="telefono">Teléfono:</label>
+      <label class="col-3" for="phone">Teléfono:</label>
       <input
         class="col-9"
         type="text"
-        name="telefono"
-        formControlName="telefono"
+        name="phone"
+        formControlName="phone"
       />
     </div>
     <div class="col-lg-6 col-xl-12 form-group">
-      <label class="col-3" for="fecha">Fecha:</label>
-      <input class="col-9" type="date" name="fecha" formControlName="fecha" />
+      <label class="col-3" for="date">Fecha:</label>
+      <input class="col-9" type="date" name="date" formControlName="date" />
     </div>
     <div class="col-lg-6 col-xl-12 form-group">
-      <label class="col-3" for="ciudad">Ciudad y estado:</label>
-      <input class="col-9" type="text" name="ciudad" formControlName="ciudad" />
+      <label class="col-3" for="city">Ciudad y estado:</label>
+      
+        <input
+          formControlName="city"
+          type="search"
+          class="col-9"
+          list="city-results"
+          name="city"
+          autofocus
+        />
+        <datalist id="city-results">
+          <option *ngFor="let item of page?.items" [value]="item.cityId">
+            {{ item.cityName }} {{ item.stateName }}
+          </option>
+        </datalist>
+      
     </div>
     <div class="col-lg-6 col-xl-12 form-group submit-link">
       <input type="submit" value="Enviar" />
