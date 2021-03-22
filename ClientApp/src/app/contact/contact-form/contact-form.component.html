@@ -1,6 +1,6 @@
 <h1>Green Leaves</h1>
 <div class="row">
-  <form [formGroup]="form" class="row col-9" (ngSubmit)="submit()">
+  <form [formGroup]="form" class="row col-9" (ngSubmit)="submit()" autocomplete="off">
     <div class="col-lg-6 col-xl-12 form-group">
       <label class="col-3" for="name">Nombre:</label>
       <input class="col-9" type="text" name="name" formControlName="name" />
@@ -43,8 +43,8 @@
           autofocus
         />
         <datalist id="city-results">
-          <option *ngFor="let item of page?.items" [value]="item.cityId">
-            {{ item.cityName }} {{ item.stateName }}
+          <option *ngFor="let item of page?.items">
+            {{item.cityName}} {{item.stateName}}
           </option>
         </datalist>
       

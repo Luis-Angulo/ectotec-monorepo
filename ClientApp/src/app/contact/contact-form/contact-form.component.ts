@@ -18,6 +18,7 @@ export class ContactFormComponent implements OnInit {
   page: Page<City>;
   wait = 500;
   minLength = 3;
+  selectedCity: City;
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +55,10 @@ export class ContactFormComponent implements OnInit {
       )
       .subscribe((page: Page<City>) => {
         this.page = page;
-        console.log(page);
+
+        this.selectedCity = page.items[0] || this.selectedCity;
+        console.log(this.selectedCity);
+        console.log(this.page);
       });
 
     return form;
@@ -65,11 +69,13 @@ export class ContactFormComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.valid) {
-      alert("form is valid");
-      // this.contactService.postContact(this.form.value);
+    let formdata = this.form.value;
+    formdata.cityId = this.selectedCity.cityId;
+    formdata.city = null;
+    if (this.form.valid) {      
+      console.log(formdata);
+      this.contactService.postContact(formdata).subscribe(e => console.log(e));
     } else {
-      // TODO: import toastr and add confirmation and errors here
       alert("form is invalid");
     }
   }
