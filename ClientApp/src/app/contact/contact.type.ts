@@ -1,7 +1,11 @@
+import { City } from "./city.type";
+
 export interface Contact {
-  nombre: String;
-  email: String;
-  telefono: String;
-  fecha: Date;
-  ciudad: String;
+  contactId?: number;
+  name: string;
+  email: string;
+  phone: string;
+  date: Date;
+  city?: City;
+  cityId: number;
 }

@@ -1,45 +1,87 @@
 <h1>Green Leaves</h1>
 <div class="row">
-  <form [formGroup]="form" class="row col-9" (ngSubmit)="submit()">
+  <form
+    [formGroup]="form"
+    class="row col-9"
+    (ngSubmit)="submit()"
+    autocomplete="off"
+  >
     <div class="col-lg-6 col-xl-12 form-group">
-      <label class="col-3" for="nombre">Nombre:</label>
-      <input class="col-9" type="text" name="nombre" formControlName="nombre" />
+      <label class="col-3" for="name">Nombre:</label>
+      <input class="col-9" type="text" name="name" formControlName="name" />
       <span
-        class="error"
+        class="text-danger"
         *ngIf="
-          form.get('nombre').invalid &&
-          (form.get('nombre').dirty || form.get('nombre').touched)
+          form.get('name').invalid &&
+          (form.get('name').dirty || form.get('name').touched)
         "
-        >Error en campo</span
+        >Error en el campo</span
       >
     </div>
 
     <div class="col-lg-6 col-xl-12 form-group">
       <label class="col-3" for="email">E-mail:</label>
       <input class="col-9" type="text" name="email" formControlName="email" />
+      <span
+        class="text-danger"
+        *ngIf="
+          form.get('email').invalid &&
+          (form.get('email').dirty || form.get('email').touched)
+        "
+        >Error en el campo</span
+      >
+    </div>
+
+    <div class="col-lg-6 col-xl-12 form-group">
+      <label class="col-3" for="phone">Teléfono:</label>
+      <input class="col-9" type="text" name="phone" formControlName="phone" />
+      <span
+        class="text-danger"
+        *ngIf="
+          form.get('phone').invalid &&
+          (form.get('phone').dirty || form.get('phone').touched)
+        "
+        >Error en el campo</span
+      >
     </div>
     <div class="col-lg-6 col-xl-12 form-group">
-      <label class="col-3" for="telefono">Teléfono:</label>
+      <label class="col-3" for="date">Fecha:</label>
+      <input class="col-9" type="date" name="date" formControlName="date" />
+    </div>
+    <div class="col-lg-6 col-xl-12 form-group">
+      <label class="col-3" for="city">Ciudad y estado:</label>
+
       <input
+        formControlName="city"
+        type="search"
         class="col-9"
-        type="text"
-        name="telefono"
-        formControlName="telefono"
+        list="city-results"
+        name="city"
+        autofocus
       />
-    </div>
-    <div class="col-lg-6 col-xl-12 form-group">
-      <label class="col-3" for="fecha">Fecha:</label>
-      <input class="col-9" type="date" name="fecha" formControlName="fecha" />
-    </div>
-    <div class="col-lg-6 col-xl-12 form-group">
-      <label class="col-3" for="ciudad">Ciudad y estado:</label>
-      <input class="col-9" type="text" name="ciudad" formControlName="ciudad" />
+      <datalist id="city-results">
+        <option *ngFor="let item of page?.items">
+          {{ item.cityName }} {{ item.stateName }}
+        </option>
+      </datalist>
+
+      <span
+        class="text-danger"
+        *ngIf="
+          form.get('city').invalid &&
+          (form.get('city').dirty || form.get('city').touched)
+        "
+        >Error en el campo</span
+      >
     </div>
     <div class="col-lg-6 col-xl-12 form-group submit-link">
       <input type="submit" value="Enviar" />
     </div>
+    <div *ngIf="form.errors">
+      <p>Errores</p>
+    </div>
   </form>
   <div class="col-3">
-    <p>[this space for messageBox, or just do a modal, whatever]</p>
+    
   </div>
 </div>

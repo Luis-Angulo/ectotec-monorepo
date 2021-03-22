@@ -1,23 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, of } from 'rxjs';
-import { Contact } from './contact.type';
+import { Observable, of } from "rxjs";
+import { Contact } from "./contact.type";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ContactService {
-
   private baseUrl: string;
 
-  constructor(private clientService: HttpClient ) { 
-    this.baseUrl = "api/contacts";
+  constructor(private clientService: HttpClient) {
+    this.baseUrl = "api/v1/contacts";
   }
 
-  // todo: replace with actual API call when backend is built
   postContact(contact: Contact): Observable<object> {
-    console.log("contactService.postContact: ", contact);
-    return of({message: "post success"});
-    // return this.clientService.post(`${this.baseUrl}`, contact);
+    return this.clientService.post(`${this.baseUrl}`, contact);
   }
 }
