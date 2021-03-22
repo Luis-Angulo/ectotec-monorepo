@@ -1,4 +1,4 @@
-INSERT INTO Ciudades (NombreCiudad, NombreEstado)
+INSERT INTO Cities (CityName, StateName)
 VALUES 
     ('Cd. Obregón', 'Sonora'),
     ('Cd. de México', 'Estado de México'),

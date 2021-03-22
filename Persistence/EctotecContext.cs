@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Ectotec.Modelo;
+using Ectotec.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace Ectotec.Persistencia
+namespace Ectotec.Persistence
 {
     public class EctotecContext : DbContext
     {
-        public DbSet<Contacto> Contactos { get; set; }
-        public DbSet<Ciudad> Ciudades { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         public EctotecContext(DbContextOptions<EctotecContext> o) : base(o)
         {
