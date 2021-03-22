@@ -23,8 +23,9 @@ namespace Ectotec.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IEnumerable<City>> Get(string term = "")
+        public async Task<Page<City>> Get(string term)
         {
+            term ??= "";
             return await _repo.GetCities(term, 10); ;
         }
     }
